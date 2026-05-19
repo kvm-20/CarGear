@@ -1,0 +1,104 @@
+.inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.inventory-table th {
+  padding: 16px;
+  color: var(--text-muted);
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.inventory-table td {
+  padding: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  vertical-align: middle;
+}
+
+.inventory-table tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.table-img {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  background: var(--bg-dark);
+}
+
+.stock-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.stock-success {
+  color: var(--success);
+  background: rgba(0, 255, 136, 0.1);
+}
+
+.stock-warning {
+  color: var(--warning);
+  background: rgba(255, 204, 0, 0.1);
+}
+
+.stock-danger {
+  color: var(--danger);
+  background: rgba(255, 42, 42, 0.1);
+}
+
+.action-btn-small {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.edit-btn {
+  background: rgba(0, 229, 255, 0.1);
+  color: var(--primary);
+}
+.edit-btn:hover {
+  background: var(--primary);
+  color: var(--bg-dark);
+}
+
+.delete-btn {
+  background: rgba(255, 42, 42, 0.1);
+  color: var(--danger);
+}
+.delete-btn:hover {
+  background: var(--danger);
+  color: white;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 24px;
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border: 1px solid var(--border-focus);
+}
