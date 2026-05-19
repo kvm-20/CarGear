@@ -2,16 +2,43 @@ import { createContext, useState, useContext } from 'react';
 
 const AuthContext = createContext();
 
+// Credenciales válidas por rol
+const CREDENTIALS = [
+  {
+    email: 'comprador@cargear.com',
+    password: 'comprador123',
+    role: 'buyer',
+    name: 'Comprador Demo',
+  },
+  {
+    email: 'taller@cargear.com',
+    password: 'taller123',
+    role: 'seller',
+    name: 'Taller Autorizado',
+  },
+  {
+    email: 'admin@cargear.com',
+    password: 'admin123',
+    role: 'admin',
+    name: 'Administrador',
+  },
+];
+
 export const AuthProvider = ({ children }) => {
-  // Roles: 'guest', 'buyer', 'seller', 'admin'
-  const [role, setRole] = useState('guest'); 
+  const [role, setRole] = useState('guest');
   const [user, setUser] = useState(null);
 
-  const login = (selectedRole) => {
-    setRole(selectedRole);
-    if (selectedRole === 'buyer') setUser({ name: 'Comprador Demo', email: 'comprador@cargear.com' });
-    if (selectedRole === 'seller') setUser({ name: 'Taller Autorizado', email: 'taller@cargear.com' });
-    if (selectedRole === 'admin') setUser({ name: 'Administrador', email: 'admin@cargear.com' });
+  // Retorna true si las credenciales son válidas, false si no
+  const login = (email, password) => {
+    const found = CREDENTIALS.find(
+      (c) => c.email === email.trim().toLowerCase() && c.password === password
+    );
+    if (found) {
+      setRole(found.role);
+      setUser({ name: found.name, email: found.email });
+      return { success: true, role: found.role };
+    }
+    return { success: false };
   };
 
   const logout = () => {
