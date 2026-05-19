@@ -67,24 +67,25 @@ npm run lint     # Ejecutar ESLint
 
 ## 3. Sistema de Roles y Autenticación
 
-La autenticación es **simulada (modo demo)**. No hay backend.
+La autenticación es **simulada (modo demo)**. No hay backend real. Las credenciales están definidas en `AuthContext.jsx`.
 
-### Roles disponibles
+### Credenciales por rol
 
-| Rol | Usuario Demo | Acceso |
-|---|---|---|
-| `guest` | — | Home, Catálogo, Login |
-| `buyer` | Comprador Demo | + Carrito, Pedidos, Tracking |
-| `seller` | Taller Autorizado | + Portal B2B, Inventario, Stats |
-| `admin` | Administrador | Todo lo anterior + Dashboard Admin |
+| Rol | Correo | Contraseña | Acceso |
+|---|---|---|---|
+| `buyer` | comprador@cargear.com | comprador123 | Carrito, Pedidos, Tracking |
+| `seller` | taller@cargear.com | taller123 | Portal B2B, Inventario, Stats |
+| `admin` | admin@cargear.com | admin123 | Todo + Dashboard Admin |
 
 ### Flujo de login
 
 ```
-/login → Seleccionar rol → login(role)
-  ├── buyer  → /
-  ├── seller → /dashboard/seller
-  └── admin  → /dashboard/admin
+/login → Ingresar email + contraseña → login(email, password)
+  ├── Credenciales válidas → setRole + setUser → redirección por rol
+  │     ├── buyer  → /
+  │     ├── seller → /dashboard/seller
+  │     └── admin  → /dashboard/admin
+  └── Credenciales inválidas → muestra mensaje de error
 ```
 
 ### Rutas protegidas
@@ -142,8 +143,18 @@ const { role, user, login, logout } = useAuth();
 |---|---|---|
 | `role` | `string` | `'guest'` \| `'buyer'` \| `'seller'` \| `'admin'` |
 | `user` | `object\|null` | `{ name, email }` del usuario activo |
-| `login(role)` | `fn` | Establece rol y datos del usuario |
+| `login(email, password)` | `fn` | Valida credenciales. Retorna `{ success: true, role }` o `{ success: false }` |
 | `logout()` | `fn` | Resetea a `guest` y limpia usuario |
+
+Las credenciales válidas están en el array `CREDENTIALS` dentro del archivo:
+
+```js
+const CREDENTIALS = [
+  { email: 'comprador@cargear.com', password: 'comprador123', role: 'buyer',  name: 'Comprador Demo' },
+  { email: 'taller@cargear.com',    password: 'taller123',    role: 'seller', name: 'Taller Autorizado' },
+  { email: 'admin@cargear.com',     password: 'admin123',     role: 'admin',  name: 'Administrador' },
+];
+```
 
 ---
 
@@ -306,8 +317,18 @@ Para roles `buyer` y `admin`. Si el pedido no existe → redirige a `/orders`.
 ---
 
 ### Login `/login`
-3 tarjetas de rol: Comprador (cyan), Vendedor (naranja), Administrador (rojo).  
-Click → `login(role)` → redirección según rol.
+Diseño en **dos columnas**:
+
+**Panel izquierdo (branding):**
+- Logo y descripción de CarGear.
+- Tarjetas de cuentas demo clicables → al hacer clic se rellenan automáticamente los campos del formulario.
+
+**Panel derecho (formulario):**
+- Campo de **correo electrónico** con ícono.
+- Campo de **contraseña** con botón mostrar/ocultar (👁️).
+- Mensaje de **error** si las credenciales son incorrectas.
+- **Spinner** de carga durante la validación (800ms simulado).
+- Al autenticar → `login(email, password)` → redirección según rol.
 
 ---
 
@@ -418,7 +439,7 @@ Tema oscuro definido en `src/index.css`:
 ## 11. Guía de Uso por Rol
 
 ### Comprador (B2C)
-1. `/login` → Comprador
+1. `/login` → email: `comprador@cargear.com` / contraseña: `comprador123`
 2. Home → buscar vehículo → **Buscar Piezas**
 3. Catálogo → filtrar → ver compatibilidad IA
 4. **Especificaciones** → **Añadir al Carrito**
@@ -426,12 +447,12 @@ Tema oscuro definido en `src/index.css`:
 6. **Mis Pedidos** → **Ver Seguimiento**
 
 ### Vendedor (B2B)
-1. `/login` → Vendedor
+1. `/login` → email: `taller@cargear.com` / contraseña: `taller123`
 2. **Mi Dashboard** → ver ventas y métricas semanales
 3. **Mi Inventario** → crear, editar o eliminar productos
 
 ### Administrador
-1. `/login` → Administrador
+1. `/login` → email: `admin@cargear.com` / contraseña: `admin123`
 2. **Dashboard Admin** → KPIs globales y gráficas
 3. **Inventario** → gestión completa de productos
 4. **Mis Pedidos** → historial completo de órdenes
