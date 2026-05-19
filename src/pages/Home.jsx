@@ -6,6 +6,7 @@ import './Home.css';
 
 const Home = () => {
   const navigate = useNavigate();
+  const BASE = import.meta.env.BASE_URL;
   const [selectedMake, setSelectedMake] = useState('');
   const [selectedModel, setSelectedModel] = useState('');
   const [selectedYear, setSelectedYear] = useState('');
@@ -22,7 +23,7 @@ const Home = () => {
   return (
     <div className="home-page">
       {/* Hero Section */}
-      <section className="hero-section">
+      <section className="hero-section" style={{ '--hero-bg-image': `url('${BASE}img/carro.jpg')` }}>
         <div className="hero-overlay"></div>
         <div className="container hero-content">
           <div className="hero-badge animate-fade-in">
@@ -100,19 +101,19 @@ const Home = () => {
         
         <div className="grid grid-cols-4">
           <div className="card text-center" style={{padding: '16px'}}>
-            <img src="/img/carro.jpg" alt="Exploradoras" style={{width: '100%', height:'120px', objectFit:'cover', borderRadius:'8px', marginBottom:'12px'}}/>
+            <img src={`${BASE}img/carro.jpg`} alt="Exploradoras" style={{width: '100%', height:'120px', objectFit:'cover', borderRadius:'8px', marginBottom:'12px'}}/>
             <div className="badge badge-ai mb-2" style={{fontSize: '0.7rem'}}>★ 98% Match</div>
             <h4 style={{fontSize: '1rem', height: '2.5rem', overflow: 'hidden'}}>Kit Exploradoras LED Dual Color</h4>
             <p className="text-primary" style={{fontWeight: 'bold'}}>$185,000</p>
           </div>
           <div className="card text-center" style={{padding: '16px'}}>
-            <img src="/img/carro2.jpg" alt="Frenos" style={{width: '100%', height:'120px', objectFit:'cover', borderRadius:'8px', marginBottom:'12px'}}/>
+            <img src={`${BASE}img/carro2.jpg`} alt="Frenos" style={{width: '100%', height:'120px', objectFit:'cover', borderRadius:'8px', marginBottom:'12px'}}/>
             <div className="badge badge-ai mb-2" style={{fontSize: '0.7rem'}}>★ 95% Match</div>
             <h4 style={{fontSize: '1rem', height: '2.5rem', overflow: 'hidden'}}>Pastillas de Freno Cerámicas Pro</h4>
             <p className="text-primary" style={{fontWeight: 'bold'}}>$85,000</p>
           </div>
           <div className="card text-center" style={{padding: '16px'}}>
-            <img src="/img/carro1.jpg" alt="Multimedia" style={{width: '100%', height:'120px', objectFit:'cover', borderRadius:'8px', marginBottom:'12px'}}/>
+            <img src={`${BASE}img/carro1.jpg`} alt="Multimedia" style={{width: '100%', height:'120px', objectFit:'cover', borderRadius:'8px', marginBottom:'12px'}}/>
             <div className="badge badge-ai mb-2" style={{fontSize: '0.7rem'}}>★ Sugerencia de Mejora</div>
             <h4 style={{fontSize: '1rem', height: '2.5rem', overflow: 'hidden'}}>Pantalla Táctil Android 10"</h4>
             <p className="text-primary" style={{fontWeight: 'bold'}}>$450,000</p>

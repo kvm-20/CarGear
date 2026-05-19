@@ -7,7 +7,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  background: url('/img/carro.jpg') center/cover no-repeat;
+  background: var(--hero-bg-image, url('/img/carro.jpg')) center/cover no-repeat;
   overflow: hidden;
 }
 

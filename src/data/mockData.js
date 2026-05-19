@@ -1,3 +1,5 @@
+const BASE = import.meta.env.BASE_URL;
+
 export const products = [
   {
     id: 1,
@@ -6,7 +8,7 @@ export const products = [
     brand: "LumiTech",
     price: 120000,
     rating: 4.8,
-    image: "/img/carro.jpg",
+    image: `${BASE}img/carro.jpg`,
     compatibility: ["Toyota Hilux 2018-2023", "Ford Ranger 2019-2023"],
     inStock: 15,
     aiRecommended: true,
@@ -24,7 +26,7 @@ export const products = [
     brand: "SmartNav",
     price: 450000,
     rating: 4.5,
-    image: "/img/carro1.jpg",
+    image: `${BASE}img/carro1.jpg`,
     compatibility: ["Universal (Requiere Marco Adaptador)"],
     inStock: 5,
     aiRecommended: false,
@@ -42,7 +44,7 @@ export const products = [
     brand: "BrakeMaster",
     price: 85000,
     rating: 4.9,
-    image: "/img/carro2.jpg",
+    image: `${BASE}img/carro2.jpg`,
     compatibility: ["Mazda 3 2014-2018", "Mazda CX-5 2013-2017"],
     inStock: 30,
     aiRecommended: true,
@@ -60,7 +62,7 @@ export const products = [
     brand: "KYB",
     price: 320000,
     rating: 4.6,
-    image: "/img/carro3.jpg",
+    image: `${BASE}img/carro3.jpg`,
     compatibility: ["Volkswagen Jetta 2011-2018", "Volkswagen Golf 2015-2021"],
     inStock: 0,
     aiRecommended: false,
@@ -78,7 +80,7 @@ export const products = [
     brand: "LumiTech",
     price: 185000,
     rating: 4.7,
-    image: "/img/carro.jpg",
+    image: `${BASE}img/carro.jpg`,
     compatibility: ["Toyota Hilux 2016-2023", "Nissan Frontier 2018-2023"],
     inStock: 12,
     aiRecommended: true,

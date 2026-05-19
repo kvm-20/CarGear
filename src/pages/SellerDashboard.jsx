@@ -4,6 +4,7 @@ import { Plus, Edit2, Trash2, AlertTriangle, Save, X, Search } from 'lucide-reac
 import './SellerDashboard.css';
 
 const SellerDashboard = () => {
+  const BASE = import.meta.env.BASE_URL;
   const [productsList, setProductsList] = useState(initialProducts);
   const [searchTerm, setSearchTerm] = useState('');
   
@@ -11,7 +12,7 @@ const SellerDashboard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [formData, setFormData] = useState({
-    name: '', category: 'Iluminación', price: '', inStock: '', image: '/img/carro.jpg'
+    name: '', category: 'Iluminación', price: '', inStock: '', image: `${BASE}img/carro.jpg`
   });
 
   const lowStockCount = productsList.filter(p => p.inStock < 10).length;
@@ -33,7 +34,7 @@ const SellerDashboard = () => {
     } else {
       setEditingId(null);
       setFormData({
-        name: '', category: 'Iluminación', price: '', inStock: '', image: '/img/carro.jpg'
+        name: '', category: 'Iluminación', price: '', inStock: '', image: `${BASE}img/carro.jpg`
       });
     }
     setIsModalOpen(true);
